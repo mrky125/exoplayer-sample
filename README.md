@@ -1,6 +1,9 @@
 # exoplayer-sample
 Sample app like Youtube.
 
+<image src="https://user-images.githubusercontent.com/69252773/136714424-b5f27b81-d1fe-4c02-ad25-209e3f3590f1.png" width="300x" />
+
+
 # Features
 - PlayerView is fixedly top of layout (not scroll)
 - ListView or RecycerView (something scroll items) is under the player
