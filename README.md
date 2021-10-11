@@ -10,8 +10,11 @@ Sample app like Youtube.
 - Full screen mode, when button in the controller view is tapped or screen orientation changes
 
 # References
-### About ExoPlayer
+### ExoPlayer
 - https://exoplayer.dev/doc/reference/com/google/android/exoplayer2/ui/PlayerView.html
 
-### About View
+### Configration Changing
+- https://developer.android.com/guide/topics/resources/runtime-changes?hl=ja
+
+### View, ...etc
 - https://stackoverflow.com/questions/40494623/android-imageview-169
