@@ -32,10 +32,12 @@ class PlayerActivity : AppCompatActivity() {
             Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show()
             supportActionBar?.hide()
             binding.root.windowInsetsController?.hide(WindowInsets.Type.statusBars())
+            viewModel.updateScreenOrientation(true)
         } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
             Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show()
             supportActionBar?.show()
             binding.root.windowInsetsController?.show(WindowInsets.Type.statusBars())
+            viewModel.updateScreenOrientation(false)
         }
     }
 

@@ -33,6 +33,7 @@ class PlayerFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         Log.d(TAG, "viewModel: $viewModel")
+        setupFullScreenButton()
         return binding.root
     }
 
@@ -61,6 +62,12 @@ class PlayerFragment : Fragment() {
                 exoPlayer.seekTo(currentWindow, playbackPosition)
                 exoPlayer.prepare()
             }
+    }
+
+    private fun setupFullScreenButton() {
+        viewModel.fullScreen.observe(viewLifecycleOwner) {
+            Log.d(TAG, "fullScreen: $it")
+        }
     }
 
     override fun onStop() {
