@@ -28,20 +28,10 @@
 
     </LinearLayout>
 
-    <FrameLayout
-        android:id="@+id/flFullscreenButton"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_margin="12dp"
+    <ImageButton
+        android:id="@id/exo_fullscreen"
+        style="@style/ExoStyledControls.Button.Bottom.FullScreen"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <ImageView
-            android:id="@+id/ivExoFullscreenIcon"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:src="@drawable/exo_controls_fullscreen_enter" />
-    </FrameLayout>
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
