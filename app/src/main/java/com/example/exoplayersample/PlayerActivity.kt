@@ -3,8 +3,10 @@ package com.example.exoplayersample
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.WindowInsets
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.exoplayersample.databinding.ActivityPlayerBinding
@@ -15,9 +17,12 @@ class PlayerActivity : AppCompatActivity() {
         ActivityPlayerBinding.inflate(layoutInflater)
     }
 
+    private val viewModel: PlayerViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        Log.d(TAG, "viewModel: $viewModel")
     }
 
     @RequiresApi(Build.VERSION_CODES.R)
@@ -32,5 +37,9 @@ class PlayerActivity : AppCompatActivity() {
             supportActionBar?.show()
             binding.root.windowInsetsController?.show(WindowInsets.Type.statusBars())
         }
+    }
+
+    companion object {
+        private const val TAG = "PlayerActivity"
     }
 }

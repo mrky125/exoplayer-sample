@@ -1,10 +1,12 @@
 package com.example.exoplayersample
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.exoplayersample.databinding.FragmentPlayerBinding
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.SimpleExoPlayer
@@ -18,6 +20,8 @@ class PlayerFragment : Fragment() {
         FragmentPlayerBinding.inflate(layoutInflater)
     }
 
+    private val viewModel: PlayerViewModel by viewModels({ requireActivity() })
+
     private var player: SimpleExoPlayer? = null
     private var playWhenReady = true
     private var currentWindow = 0
@@ -28,6 +32,7 @@ class PlayerFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
+        Log.d(TAG, "viewModel: $viewModel")
         return binding.root
     }
 
@@ -71,5 +76,9 @@ class PlayerFragment : Fragment() {
             it.release()
         }
         player = null
+    }
+
+    companion object {
+        private const val TAG = "PlayerFragment"
     }
 }
