@@ -85,7 +85,9 @@ class PlayerFragment : Fragment() {
         }
         fullScreenBtn.setOnClickListener {
             if (viewModel.fullScreen.value == true) {
-                if (requireActivity().requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+                if (requireActivity().requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE ||
+                    requireActivity().requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
+                ) {
                     Log.d(TAG, "sensor off")
                     viewModel.updateOrientationSensor(false)
                 } else {
@@ -103,7 +105,7 @@ class PlayerFragment : Fragment() {
                     Log.d(TAG, "sensor on")
                     viewModel.updateOrientationSensor(true)
                 }
-                requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+                requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
                 viewModel.updateScreenOrientation(true)
                 Log.d(TAG, "landscape")
             }

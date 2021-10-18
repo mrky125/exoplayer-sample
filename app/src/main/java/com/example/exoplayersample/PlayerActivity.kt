@@ -44,7 +44,7 @@ class PlayerActivity : AppCompatActivity() {
                         if (viewModel.orientationSensor.value == true) {
                             Log.d(TAG, "landscape")
                             this@PlayerActivity.requestedOrientation =
-                                ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+                                ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
                             viewModel.updateScreenOrientation(true)
                         } else {
                             if (viewModel.fullScreen.value == true) {
