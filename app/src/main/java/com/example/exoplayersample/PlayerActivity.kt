@@ -13,6 +13,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.exoplayersample.databinding.ActivityPlayerBinding
 import android.content.pm.ActivityInfo
+import android.provider.Settings
 
 class PlayerActivity : AppCompatActivity() {
 
@@ -36,6 +37,12 @@ class PlayerActivity : AppCompatActivity() {
 
                 @SuppressLint("SourceLockedOrientationActivity")
                 override fun onOrientationChanged(orientation: Int) {
+                    val systemRotation =
+                        Settings.System.getInt(contentResolver, Settings.System.ACCELEROMETER_ROTATION)
+                    if (systemRotation == 0) {
+                        return
+                    }
+
                     Log.d(TAG, "$orientation")
                     val leftLandscape = 90
                     val rightLandscape = 270
