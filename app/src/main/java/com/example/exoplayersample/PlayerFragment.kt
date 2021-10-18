@@ -1,5 +1,6 @@
 package com.example.exoplayersample
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -67,6 +68,7 @@ class PlayerFragment : Fragment() {
             }
     }
 
+    @SuppressLint("SourceLockedOrientationActivity")
     private fun setupFullScreenButton() {
         val fullScreenBtn = binding.videoView.findViewById<ImageButton>(R.id.exo_fullscreen)
         viewModel.fullScreen.observe(viewLifecycleOwner) {

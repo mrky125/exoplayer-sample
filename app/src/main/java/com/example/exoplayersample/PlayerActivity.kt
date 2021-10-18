@@ -1,5 +1,6 @@
 package com.example.exoplayersample
 
+import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
@@ -33,6 +34,7 @@ class PlayerActivity : AppCompatActivity() {
                     return a > b - epsilon && a < b + epsilon
                 }
 
+                @SuppressLint("SourceLockedOrientationActivity")
                 override fun onOrientationChanged(orientation: Int) {
                     Log.d(TAG, "$orientation")
                     val leftLandscape = 90
