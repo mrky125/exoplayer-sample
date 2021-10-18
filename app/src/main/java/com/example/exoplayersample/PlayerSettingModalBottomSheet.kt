@@ -11,6 +11,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class PlayerSettingModalBottomSheet : BottomSheetDialogFragment() {
 
+    private val binding by lazy(LazyThreadSafetyMode.NONE) {
+        ModalBottomSheetPlayerSettingBinding.inflate(layoutInflater)
+    }
     private val viewModel: PlayerViewModel by viewModels({ requireActivity() })
 
     override fun onCreateView(
@@ -18,8 +21,13 @@ class PlayerSettingModalBottomSheet : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "viewModel: $viewModel")
-        return ModalBottomSheetPlayerSettingBinding.inflate(inflater, container, false).root
+        binding.viewModel = viewModel
     }
 
     companion object {

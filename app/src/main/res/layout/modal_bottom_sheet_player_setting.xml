@@ -1,47 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <FrameLayout
-        android:id="@+id/standard_bottom_sheet"
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.exoplayersample.PlayerViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content">
 
-        <!-- Bottom sheet contents. -->
-        <RadioGroup
+        <FrameLayout
+            android:id="@+id/standard_bottom_sheet"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <RadioButton
-                android:id="@+id/rbSpeed05"
+            <!-- Bottom sheet contents. -->
+            <RadioGroup
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="x0.5"
-                android:textSize="32sp" />
+                android:layout_height="wrap_content">
 
-            <RadioButton
-                android:id="@+id/rbSpeedNormal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="normal"
-                android:textSize="32sp" />
+                <RadioButton
+                    android:id="@+id/rbSpeed05"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="x0.5"
+                    android:textSize="32sp" />
 
-            <RadioButton
-                android:id="@+id/rbSpeed15"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="x1.5"
-                android:textSize="32sp" />
+                <RadioButton
+                    android:id="@+id/rbSpeedNormal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="normal"
+                    android:textSize="32sp" />
 
-        </RadioGroup>
+                <RadioButton
+                    android:id="@+id/rbSpeed15"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="x1.5"
+                    android:textSize="32sp" />
 
-    </FrameLayout>
+            </RadioGroup>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
