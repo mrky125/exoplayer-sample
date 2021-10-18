@@ -13,6 +13,8 @@ import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
+import android.content.pm.ActivityInfo
+import android.widget.ImageButton
 
 class PlayerFragment : Fragment() {
 
@@ -65,8 +67,34 @@ class PlayerFragment : Fragment() {
     }
 
     private fun setupFullScreenButton() {
+        val fullScreenBtn = binding.videoView.findViewById<ImageButton>(R.id.exo_fullscreen)
         viewModel.fullScreen.observe(viewLifecycleOwner) {
             Log.d(TAG, "fullScreen: $it")
+        }
+        fullScreenBtn.setOnClickListener {
+            if (viewModel.fullScreen.value == true) {
+                if (requireActivity().requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+                    Log.d(TAG, "sensor off")
+                    viewModel.updateOrientationSensor(false)
+                } else {
+                    Log.d(TAG, "sensor on")
+                    viewModel.updateOrientationSensor(true)
+                }
+                requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+                viewModel.updateScreenOrientation(false)
+                Log.d(TAG, "portrait")
+            } else {
+                if (requireActivity().requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+                    Log.d(TAG, "sensor off")
+                    viewModel.updateOrientationSensor(false)
+                } else {
+                    Log.d(TAG, "sensor on")
+                    viewModel.updateOrientationSensor(true)
+                }
+                requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+                viewModel.updateScreenOrientation(true)
+                Log.d(TAG, "landscape")
+            }
         }
     }
 
