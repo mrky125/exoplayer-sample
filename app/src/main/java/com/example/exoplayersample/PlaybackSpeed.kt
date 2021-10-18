@@ -8,6 +8,14 @@ enum class PlaybackSpeed {
     X_15;
 
     companion object {
+        fun PlaybackSpeed.toFloat(): Float {
+            return when (this) {
+                X_05 -> 0.5f
+                NORMAL -> 1.0f
+                X_15 -> 1.5f
+            }
+        }
+
         @JvmStatic
         @InverseMethod("buttonIdToType")
         fun typeToButtonId(radioType: PlaybackSpeed): Int {

@@ -17,6 +17,7 @@ import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import android.content.pm.ActivityInfo
 import android.widget.ImageButton
 import androidx.appcompat.content.res.AppCompatResources
+import com.example.exoplayersample.PlaybackSpeed.Companion.toFloat
 
 class PlayerFragment : Fragment() {
 
@@ -44,6 +45,7 @@ class PlayerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupPlaybackSpeedButton()
+        setupPlaybackSpeedChanging()
     }
 
     override fun onStart() {
@@ -71,6 +73,13 @@ class PlayerFragment : Fragment() {
                 exoPlayer.seekTo(currentWindow, playbackPosition)
                 exoPlayer.prepare()
             }
+    }
+
+    private fun setupPlaybackSpeedChanging() {
+        viewModel.radioTypePlaybackSpeed.observe(viewLifecycleOwner) {
+            Log.d(TAG, "selected speed: $it")
+            player?.setPlaybackSpeed(it.toFloat())
+        }
     }
 
     private fun setupPlaybackSpeedButton() {
