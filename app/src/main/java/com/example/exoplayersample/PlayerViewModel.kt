@@ -14,6 +14,9 @@ class PlayerViewModel : ViewModel() {
     private val _orientationSensor: MutableLiveData<Boolean> = MutableLiveData(true)
     val orientationSensor = _orientationSensor.asLiveData()
 
+    private val _playbackParamSpeed: MutableLiveData<Float> = MutableLiveData(1f)
+    val playbackParamSpeed = _playbackParamSpeed.asLiveData()
+
     fun updateScreenOrientation(isFullScreen: Boolean) {
         _fullScreen.value = isFullScreen
     }
