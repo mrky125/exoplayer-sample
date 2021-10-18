@@ -8,6 +8,8 @@
             name="viewModel"
             type="com.example.exoplayersample.PlayerViewModel" />
 
+        <import type="com.example.exoplayersample.PlaybackSpeed" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,7 +29,8 @@
             <!-- Bottom sheet contents. -->
             <RadioGroup
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:checkedButton="@={PlaybackSpeed.typeToButtonId(viewModel.radioTypePlaybackSpeed)}">
 
                 <RadioButton
                     android:id="@+id/rbSpeed05"

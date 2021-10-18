@@ -14,6 +14,7 @@ class PlayerViewModel : ViewModel() {
     private val _orientationSensor: MutableLiveData<Boolean> = MutableLiveData(true)
     val orientationSensor = _orientationSensor.asLiveData()
 
+    val radioTypePlaybackSpeed = MutableLiveData(PlaybackSpeed.NORMAL)
     private val _playbackParamSpeed: MutableLiveData<Float> = MutableLiveData(1f)
     val playbackParamSpeed = _playbackParamSpeed.asLiveData()
 
