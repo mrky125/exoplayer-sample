@@ -15,6 +15,7 @@ import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import android.content.pm.ActivityInfo
 import android.widget.ImageButton
+import androidx.appcompat.content.res.AppCompatResources
 
 class PlayerFragment : Fragment() {
 
@@ -70,6 +71,17 @@ class PlayerFragment : Fragment() {
         val fullScreenBtn = binding.videoView.findViewById<ImageButton>(R.id.exo_fullscreen)
         viewModel.fullScreen.observe(viewLifecycleOwner) {
             Log.d(TAG, "fullScreen: $it")
+            if (it) {
+                fullScreenBtn.setImageDrawable(AppCompatResources.getDrawable(
+                    requireActivity(),
+                    R.drawable.exo_styled_controls_fullscreen_exit)
+                )
+            } else {
+                fullScreenBtn.setImageDrawable(AppCompatResources.getDrawable(
+                    requireActivity(),
+                    R.drawable.exo_controls_fullscreen_enter)
+                )
+            }
         }
         fullScreenBtn.setOnClickListener {
             if (viewModel.fullScreen.value == true) {
