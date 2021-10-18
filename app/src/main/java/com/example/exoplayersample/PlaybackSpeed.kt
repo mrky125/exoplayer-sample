@@ -2,10 +2,10 @@ package com.example.exoplayersample
 
 import androidx.databinding.InverseMethod
 
-enum class PlaybackSpeed {
-    X_05,
-    NORMAL,
-    X_15;
+enum class PlaybackSpeed(val float: Float) {
+    X_05(0.5f),
+    NORMAL(1.0f),
+    X_15(1.5f);
 
     companion object {
         @JvmStatic

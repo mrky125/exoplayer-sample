@@ -44,6 +44,7 @@ class PlayerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupPlaybackSpeedButton()
+        setupPlaybackSpeedChanging()
     }
 
     override fun onStart() {
@@ -71,6 +72,13 @@ class PlayerFragment : Fragment() {
                 exoPlayer.seekTo(currentWindow, playbackPosition)
                 exoPlayer.prepare()
             }
+    }
+
+    private fun setupPlaybackSpeedChanging() {
+        viewModel.radioTypePlaybackSpeed.observe(viewLifecycleOwner) {
+            Log.d(TAG, "selected speed: $it")
+            player?.setPlaybackSpeed(it.float)
+        }
     }
 
     private fun setupPlaybackSpeedButton() {
