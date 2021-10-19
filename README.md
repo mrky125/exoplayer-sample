@@ -9,6 +9,17 @@ Sample app like Youtube.
 - ListView or RecycerView (something scroll items) is under the player
 - Full screen mode, when button in the controller view is tapped or screen orientation changes
 
+### Playback speed
+Use `setPlaybackSpeed` (float) in `Player`
+
+### Fastfoward, Rewind
+Use `setSeekForwardIncrementMs`, `setSeekBackIncrementMs` in `SimpleExoPlayer.Builder`
+
+※ attribute `app:fastforward_increment` was removed
+
+https://github.com/google/ExoPlayer/blob/r2.15.0/RELEASENOTES.md#2150-2021-08-10
+
+
 # References
 ### ExoPlayer
 - https://exoplayer.dev/doc/reference/com/google/android/exoplayer2/ui/PlayerView.html
