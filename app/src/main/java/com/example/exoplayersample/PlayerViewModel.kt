@@ -15,8 +15,6 @@ class PlayerViewModel : ViewModel() {
     val orientationSensor = _orientationSensor.asLiveData()
 
     val radioTypePlaybackSpeed = MutableLiveData(PlaybackSpeed.NORMAL)
-    private val _playbackParamSpeed: MutableLiveData<Float> = MutableLiveData(1f)
-    val playbackParamSpeed = _playbackParamSpeed.asLiveData()
 
     fun updateScreenOrientation(isFullScreen: Boolean) {
         _fullScreen.value = isFullScreen
