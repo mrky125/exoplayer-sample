@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.example.exoplayersample.databinding.ModalBottomSheetPlayerSettingBinding
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class PlayerSettingModalBottomSheet : BottomSheetDialogFragment() {
@@ -28,6 +29,12 @@ class PlayerSettingModalBottomSheet : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "viewModel: $viewModel")
         binding.viewModel = viewModel
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val behavior = BottomSheetBehavior.from(requireView().parent as View)
+        behavior.state = BottomSheetBehavior.STATE_EXPANDED
     }
 
     companion object {
