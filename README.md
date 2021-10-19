@@ -13,12 +13,16 @@ Sample app like Youtube.
 Use `setPlaybackSpeed` (float) in `Player`
 
 ### Fastfoward, Rewind
-Use `setSeekForwardIncrementMs`, `setSeekBackIncrementMs` in `SimpleExoPlayer.Builder`
+Use `setSeekForwardIncrementMs`, `setSeekBackIncrementMs` in SimpleExoPlayer.Builder
 
 ※ attribute `app:fastforward_increment` was removed
 
 https://github.com/google/ExoPlayer/blob/r2.15.0/RELEASENOTES.md#2150-2021-08-10
 
+### Volume
+Use `increaseDeviceVolume`, `decreaseDeviceVolume` in SimpleExoPlayer
+
+These change **device's volume**, so I can't set player volume individually.
 
 # References
 ### ExoPlayer
