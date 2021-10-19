@@ -41,6 +41,12 @@ class PlayerFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupPlaybackSpeedButton()
+        setupPlaybackSpeedChanging()
+    }
+
     override fun onStart() {
         super.onStart()
         initializePlayer()
@@ -66,6 +72,21 @@ class PlayerFragment : Fragment() {
                 exoPlayer.seekTo(currentWindow, playbackPosition)
                 exoPlayer.prepare()
             }
+    }
+
+    private fun setupPlaybackSpeedChanging() {
+        viewModel.radioTypePlaybackSpeed.observe(viewLifecycleOwner) {
+            Log.d(TAG, "selected speed: $it")
+            player?.setPlaybackSpeed(it.float)
+        }
+    }
+
+    private fun setupPlaybackSpeedButton() {
+        val playbackSpeedBtn = binding.videoView.findViewById<ImageButton>(R.id.exo_playback_speed)
+        playbackSpeedBtn.setOnClickListener {
+            val bottomSheet = PlayerSettingModalBottomSheet()
+            bottomSheet.show(childFragmentManager, "")
+        }
     }
 
     @SuppressLint("SourceLockedOrientationActivity")
