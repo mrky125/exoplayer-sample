@@ -19,6 +19,10 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
+            android:id="@+id/exo_prev"
+            style="@style/ExoMediaButton.Previous" />
+
+        <ImageButton
             android:id="@id/exo_play"
             style="@style/ExoMediaButton.Play" />
 
@@ -29,6 +33,10 @@
         <ImageButton
             android:id="@+id/exo_playback_speed"
             style="@style/ExoStyledControls.Button.Bottom.PlaybackSpeed" />
+
+        <ImageButton
+            android:id="@+id/exo_next"
+            style="@style/ExoMediaButton.Next" />
 
     </LinearLayout>
 
