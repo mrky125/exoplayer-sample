@@ -7,6 +7,12 @@
     android:background="#00000000"
     android:orientation="vertical">
 
+    <ImageButton
+        android:id="@+id/exo_playback_speed"
+        style="@style/ExoStyledControls.Button.Bottom.PlaybackSpeed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,10 +35,6 @@
         <ImageButton
             android:id="@id/exo_pause"
             style="@style/ExoMediaButton.Pause" />
-
-        <ImageButton
-            android:id="@+id/exo_playback_speed"
-            style="@style/ExoStyledControls.Button.Bottom.PlaybackSpeed" />
 
         <ImageButton
             android:id="@+id/exo_next"
