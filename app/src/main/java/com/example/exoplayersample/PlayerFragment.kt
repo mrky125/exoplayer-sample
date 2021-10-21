@@ -67,7 +67,10 @@ class PlayerFragment : Fragment() {
                 val dataSourceFactory = DefaultHttpDataSource.Factory()
                 val mediaSource = ProgressiveMediaSource.Factory(dataSourceFactory)
                     .createMediaSource(MediaItem.fromUri(getString(R.string.media_url_mp4)))
-                exoPlayer.setMediaSource(mediaSource)
+                exoPlayer.addMediaSource(mediaSource)
+                val mediaSource2 = ProgressiveMediaSource.Factory(dataSourceFactory)
+                    .createMediaSource(MediaItem.fromUri(getString(R.string.media_url_mp3)))
+                exoPlayer.addMediaSource(mediaSource2)
                 exoPlayer.playWhenReady = playWhenReady
                 exoPlayer.seekTo(currentWindow, playbackPosition)
                 exoPlayer.prepare()
