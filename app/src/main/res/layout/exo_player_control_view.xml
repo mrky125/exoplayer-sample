@@ -43,7 +43,18 @@
     <ImageButton
         android:id="@id/exo_fullscreen"
         style="@style/ExoStyledControls.Button.Bottom.FullScreen"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.exoplayer2.ui.DefaultTimeBar
+        android:id="@+id/exo_progress"
+        android:layout_width="0dp"
+        android:layout_height="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:played_color="@color/red"
+        app:scrubber_color="@color/red" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
