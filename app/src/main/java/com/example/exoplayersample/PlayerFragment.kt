@@ -17,6 +17,7 @@ import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import android.content.pm.ActivityInfo
 import android.widget.ImageButton
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.Player
@@ -171,12 +172,16 @@ class PlayerFragment : Fragment() {
             newPosition: Player.PositionInfo,
             reason: Int
         ) {
+            super.onPositionDiscontinuity(oldPosition, newPosition, reason)
             Log.d(TAG, "reason: $reason, old window index: ${oldPosition.windowIndex}, " +
                     "new window index: ${newPosition.windowIndex}")
-            super.onPositionDiscontinuity(oldPosition, newPosition, reason)
+            viewModel.updateCurrentWindowIndex(newPosition.windowIndex)
             if (reason == Player.DISCONTINUITY_REASON_AUTO_TRANSITION) {
-                // プレイリストの次の動画に移動した場合は、新しいインデックスを渡してUIを更新する
-                viewModel.updateCurrentWindowIndex(newPosition.windowIndex)
+                Toast.makeText(
+                    requireActivity(),
+                    "playlist auto transited! ${oldPosition.windowIndex} to ${newPosition.windowIndex}",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
