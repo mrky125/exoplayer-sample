@@ -61,13 +61,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:text="買う"
+            android:text="@string/go_purchase_btn_text"
             android:textSize="16sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="課金しか勝たん"
+            android:text="@string/go_purchase_main_text"
             android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold" />
