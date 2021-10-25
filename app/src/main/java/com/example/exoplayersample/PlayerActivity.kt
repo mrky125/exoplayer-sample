@@ -1,6 +1,8 @@
 package com.example.exoplayersample
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
@@ -26,6 +28,7 @@ class PlayerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        setupFragment()
         Log.d(TAG, "viewModel: $viewModel")
         val orientationEventListener: OrientationEventListener =
             object : OrientationEventListener(this) {
@@ -96,6 +99,13 @@ class PlayerActivity : AppCompatActivity() {
         orientationEventListener.enable()
     }
 
+    private fun setupFragment() {
+        val strVideoType = intent.getStringExtra(EXTRA_VIDEO_TYPE) ?: ""
+        supportFragmentManager.beginTransaction()
+            .replace(binding.container.id, PlayerFragment.newInstance(strVideoType))
+            .commit()
+    }
+
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
@@ -114,5 +124,12 @@ class PlayerActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "PlayerActivity"
+        private const val EXTRA_VIDEO_TYPE = "extra_video_type"
+
+        fun newIntent(context: Context, strVideoType: String): Intent {
+            return Intent(context, PlayerActivity::class.java).apply {
+                putExtra(EXTRA_VIDEO_TYPE, strVideoType)
+            }
+        }
     }
 }

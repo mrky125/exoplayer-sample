@@ -7,7 +7,6 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/container"
-        android:name="com.example.exoplayersample.PlayerFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

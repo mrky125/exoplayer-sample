@@ -184,5 +184,14 @@ class PlayerFragment : Fragment() {
 
     companion object {
         private const val TAG = "PlayerFragment"
+        private const val ARGS_VIDEO_TYPE = "args_video_type"
+
+        fun newInstance(strVideoType: String): PlayerFragment {
+            return PlayerFragment().apply {
+                arguments = Bundle().apply {
+                    putString(ARGS_VIDEO_TYPE, strVideoType)
+                }
+            }
+        }
     }
 }

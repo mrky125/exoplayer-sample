@@ -1,6 +1,5 @@
 package com.example.exoplayersample
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.exoplayersample.databinding.ActivityMainBinding
@@ -18,8 +17,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupActivityNavigation() {
-        binding.btnNavigateToPlayer.setOnClickListener {
-            startActivity(Intent(this, PlayerActivity::class.java))
+        binding.also {
+            it.btnNavigateToFullVideo.setOnClickListener {
+                startActivity(PlayerActivity.newIntent(this, "full"))
+            }
+            it.btnNavigateToShortVideo.setOnClickListener {
+                startActivity(PlayerActivity.newIntent(this, "short"))
+            }
         }
     }
 }
