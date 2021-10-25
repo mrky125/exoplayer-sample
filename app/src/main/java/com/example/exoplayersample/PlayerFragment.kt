@@ -17,6 +17,8 @@ import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import android.content.pm.ActivityInfo
 import android.widget.ImageButton
 import androidx.appcompat.content.res.AppCompatResources
+import com.google.android.exoplayer2.ExoPlayer
+import com.google.android.exoplayer2.Player
 
 class PlayerFragment : Fragment() {
 
@@ -30,6 +32,7 @@ class PlayerFragment : Fragment() {
     private var playWhenReady = true
     private var currentWindow = 0
     private var playbackPosition = 0L
+    private val playbackStateListener = playbackStateListener()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -66,13 +69,14 @@ class PlayerFragment : Fragment() {
                 // https://exoplayer.dev/progressive.html
                 val dataSourceFactory = DefaultHttpDataSource.Factory()
                 val mediaSource = ProgressiveMediaSource.Factory(dataSourceFactory)
-                    .createMediaSource(MediaItem.fromUri(getString(R.string.media_url_mp4)))
-                exoPlayer.addMediaSource(mediaSource)
-                val mediaSource2 = ProgressiveMediaSource.Factory(dataSourceFactory)
                     .createMediaSource(MediaItem.fromUri(getString(R.string.media_url_mp3)))
-                exoPlayer.addMediaSource(mediaSource2)
+                exoPlayer.addMediaSource(mediaSource)
+//                val mediaSource2 = ProgressiveMediaSource.Factory(dataSourceFactory)
+//                    .createMediaSource(MediaItem.fromUri(getString(R.string.media_url_mp4)))
+//                exoPlayer.addMediaSource(mediaSource2)
                 exoPlayer.playWhenReady = playWhenReady
                 exoPlayer.seekTo(currentWindow, playbackPosition)
+                exoPlayer.addListener(playbackStateListener)
                 exoPlayer.prepare()
             }
     }
@@ -138,6 +142,25 @@ class PlayerFragment : Fragment() {
         }
     }
 
+    private fun playbackStateListener() = object : Player.Listener {
+        override fun onPlaybackStateChanged(playbackState: Int) {
+            val stateString: String = when (playbackState) {
+                ExoPlayer.STATE_IDLE -> "ExoPlayer.STATE_IDLE      -"
+                ExoPlayer.STATE_BUFFERING -> "ExoPlayer.STATE_BUFFERING -"
+                ExoPlayer.STATE_READY -> "ExoPlayer.STATE_READY     -"
+                ExoPlayer.STATE_ENDED -> {
+                    showPurchaseView()
+                    "ExoPlayer.STATE_ENDED     -"
+                }
+                else -> "UNKNOWN_STATE             -"
+            }
+            Log.d(TAG, "changed state to $stateString")
+        }
+    }
+
+    private fun showPurchaseView() {
+    }
+
     override fun onStop() {
         super.onStop()
         releasePlayer()
@@ -148,6 +171,7 @@ class PlayerFragment : Fragment() {
             playbackPosition = it.currentPosition
             currentWindow = it.currentWindowIndex
             playWhenReady = it.playWhenReady
+            it.removeListener(playbackStateListener)
             it.release()
         }
         player = null
