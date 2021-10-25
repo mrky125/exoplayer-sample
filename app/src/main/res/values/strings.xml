@@ -7,4 +7,6 @@
 
     <string name="go_purchase_btn_text">YES</string>
     <string name="go_purchase_main_text">Join premium course now!!</string>
+
+    <string name="current_window_index">current window index: %d</string>
 </resources>
