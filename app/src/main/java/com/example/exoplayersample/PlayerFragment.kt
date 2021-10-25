@@ -164,6 +164,19 @@ class PlayerFragment : Fragment() {
             }
             Log.d(TAG, "changed state to $stateString")
         }
+
+        override fun onPositionDiscontinuity(
+            oldPosition: Player.PositionInfo,
+            newPosition: Player.PositionInfo,
+            reason: Int
+        ) {
+            Log.d(TAG, "reason: $reason, old window index: ${oldPosition.windowIndex}, " +
+                    "new window index: ${newPosition.windowIndex}")
+            super.onPositionDiscontinuity(oldPosition, newPosition, reason)
+            if (reason == Player.DISCONTINUITY_REASON_AUTO_TRANSITION) {
+                // TODO: update viewModel's LiveData!
+            }
+        }
     }
 
     private fun showPurchaseView() {
