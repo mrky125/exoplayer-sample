@@ -82,6 +82,7 @@ class PlayerFragment : Fragment() {
                 }
                 exoPlayer.playWhenReady = playWhenReady
                 exoPlayer.seekTo(currentWindow, playbackPosition)
+                viewModel.updateCurrentWindowIndex(currentWindow)
                 exoPlayer.addListener(playbackStateListener)
                 exoPlayer.prepare()
             }
@@ -174,7 +175,8 @@ class PlayerFragment : Fragment() {
                     "new window index: ${newPosition.windowIndex}")
             super.onPositionDiscontinuity(oldPosition, newPosition, reason)
             if (reason == Player.DISCONTINUITY_REASON_AUTO_TRANSITION) {
-                // TODO: update viewModel's LiveData!
+                // プレイリストの次の動画に移動した場合は、新しいインデックスを渡してUIを更新する
+                viewModel.updateCurrentWindowIndex(newPosition.windowIndex)
             }
         }
     }

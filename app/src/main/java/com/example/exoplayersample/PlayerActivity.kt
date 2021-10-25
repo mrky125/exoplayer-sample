@@ -28,7 +28,10 @@ class PlayerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        binding.viewModel = viewModel
+        binding.also {
+            it.viewModel = viewModel
+            it.lifecycleOwner = this
+        }
         setupFragment()
         Log.d(TAG, "viewModel: $viewModel")
         val orientationEventListener: OrientationEventListener =

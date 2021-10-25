@@ -26,4 +26,8 @@ class PlayerViewModel : ViewModel() {
     fun updateOrientationSensor(orientationSensor: Boolean) {
         _orientationSensor.value = orientationSensor
     }
+
+    fun updateCurrentWindowIndex(index: Int) {
+        _currentWindowIndex.value = index
+    }
 }
