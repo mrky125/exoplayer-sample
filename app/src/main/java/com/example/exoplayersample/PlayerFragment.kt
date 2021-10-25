@@ -35,6 +35,8 @@ class PlayerFragment : Fragment() {
     private var playbackPosition = 0L
     private val playbackStateListener = playbackStateListener()
 
+    private var videoType = ""
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -47,6 +49,7 @@ class PlayerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        videoType = requireArguments().getString(ARGS_VIDEO_TYPE) ?: ""
         setupPlaybackSpeedButton()
         setupPlaybackSpeedChanging()
     }
@@ -72,9 +75,11 @@ class PlayerFragment : Fragment() {
                 val mediaSource = ProgressiveMediaSource.Factory(dataSourceFactory)
                     .createMediaSource(MediaItem.fromUri(getString(R.string.media_url_mp3)))
                 exoPlayer.addMediaSource(mediaSource)
-//                val mediaSource2 = ProgressiveMediaSource.Factory(dataSourceFactory)
-//                    .createMediaSource(MediaItem.fromUri(getString(R.string.media_url_mp4)))
-//                exoPlayer.addMediaSource(mediaSource2)
+                if (videoType == "full") {
+                    val mediaSource2 = ProgressiveMediaSource.Factory(dataSourceFactory)
+                        .createMediaSource(MediaItem.fromUri(getString(R.string.media_url_mp4)))
+                    exoPlayer.addMediaSource(mediaSource2)
+                }
                 exoPlayer.playWhenReady = playWhenReady
                 exoPlayer.seekTo(currentWindow, playbackPosition)
                 exoPlayer.addListener(playbackStateListener)
@@ -150,7 +155,9 @@ class PlayerFragment : Fragment() {
                 ExoPlayer.STATE_BUFFERING -> "ExoPlayer.STATE_BUFFERING -"
                 ExoPlayer.STATE_READY -> "ExoPlayer.STATE_READY     -"
                 ExoPlayer.STATE_ENDED -> {
-                    showPurchaseView()
+                    if (videoType == "short") {
+                        showPurchaseView()
+                    }
                     "ExoPlayer.STATE_ENDED     -"
                 }
                 else -> "UNKNOWN_STATE             -"
