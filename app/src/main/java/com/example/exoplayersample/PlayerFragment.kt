@@ -16,6 +16,7 @@ import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import android.content.pm.ActivityInfo
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import androidx.appcompat.content.res.AppCompatResources
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.Player
@@ -159,6 +160,10 @@ class PlayerFragment : Fragment() {
     }
 
     private fun showPurchaseView() {
+        binding.videoView.apply {
+            findViewById<LinearLayout>(R.id.ll_playback_control_view).visibility = View.GONE
+            findViewById<LinearLayout>(R.id.ll_purchase_view).visibility = View.VISIBLE
+        }
     }
 
     override fun onStop() {
