@@ -19,6 +19,7 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
+import com.github.vkay94.dtpv.youtube.YouTubeOverlay
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.Player
 
@@ -58,6 +59,7 @@ class PlayerFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         initializePlayer()
+        setupFastForwardRewindDoubleTap()
     }
 
     private fun initializePlayer() {
@@ -87,6 +89,23 @@ class PlayerFragment : Fragment() {
                 exoPlayer.addListener(playbackStateListener)
                 exoPlayer.prepare()
             }
+    }
+
+    private fun setupFastForwardRewindDoubleTap() {
+        binding.youtubeOverlay.also { overlay ->
+            overlay.performListener(object : YouTubeOverlay.PerformListener {
+                override fun onAnimationStart() {
+                    overlay.visibility = View.VISIBLE
+                }
+
+                override fun onAnimationEnd() {
+                    overlay.visibility = View.GONE
+                }
+            })
+            player?.let {
+                overlay.player(it)
+            }
+        }
     }
 
     private fun setupPlaybackSpeedChanging() {

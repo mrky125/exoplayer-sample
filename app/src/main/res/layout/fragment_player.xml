@@ -4,10 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.google.android.exoplayer2.ui.PlayerView
+    <com.github.vkay94.dtpv.DoubleTapPlayerView
         android:id="@+id/videoView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:dtpv_controller="@id/youtube_overlay"
         app:hide_on_touch="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="W,16:9"
@@ -16,5 +17,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:show_buffering="always"
         app:show_timeout="5000" />
+
+    <com.github.vkay94.dtpv.youtube.YouTubeOverlay
+        android:id="@+id/youtube_overlay"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/videoView"
+        app:layout_constraintEnd_toEndOf="@+id/videoView"
+        app:layout_constraintStart_toStartOf="@+id/videoView"
+        app:layout_constraintTop_toTopOf="@+id/videoView"
+        app:yt_playerView="@id/videoView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
