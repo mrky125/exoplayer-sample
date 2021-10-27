@@ -31,6 +31,7 @@ class PlayerFragment : Fragment() {
     private val viewModel: PlayerViewModel by viewModels({ requireActivity() })
 
     private var player: SimpleExoPlayer? = null
+    private var trackSelector: DefaultTrackSelector? = null
     private var playWhenReady = true
     private var currentWindow = 0
     private var playbackPosition = 0L
@@ -52,6 +53,7 @@ class PlayerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         videoType = requireArguments().getString(ARGS_VIDEO_TYPE) ?: ""
         setupPlaybackSpeedButton()
+        setupVideoQualityChanging()
         setupPlaybackSpeedChanging()
     }
 
@@ -61,11 +63,11 @@ class PlayerFragment : Fragment() {
     }
 
     private fun initializePlayer() {
-        val trackSelector = DefaultTrackSelector(requireActivity()).apply {
+        trackSelector = DefaultTrackSelector(requireActivity()).apply {
             setParameters(buildUponParameters().setMaxVideoSizeSd())
         }
         player = SimpleExoPlayer.Builder(requireActivity())
-            .setTrackSelector(trackSelector)
+            .setTrackSelector(trackSelector!!)
             .build()
             .also { exoPlayer ->
                 binding.videoView.player = exoPlayer
@@ -87,6 +89,16 @@ class PlayerFragment : Fragment() {
                 exoPlayer.addListener(playbackStateListener)
                 exoPlayer.prepare()
             }
+    }
+
+    private fun setupVideoQualityChanging() {
+        viewModel.radioTypeVideoQuality.observe(viewLifecycleOwner) {
+            Log.d(TAG, "selected quality: $it")
+            val newParameter = DefaultTrackSelector.ParametersBuilder(requireActivity())
+                .setMaxVideoBitrate(it.int)
+                .build()
+            (player?.trackSelector as DefaultTrackSelector).parameters = newParameter
+        }
     }
 
     private fun setupPlaybackSpeedChanging() {
@@ -207,6 +219,7 @@ class PlayerFragment : Fragment() {
             it.release()
         }
         player = null
+        trackSelector = null
     }
 
     companion object {

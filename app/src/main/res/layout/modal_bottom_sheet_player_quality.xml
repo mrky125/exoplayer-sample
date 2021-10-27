@@ -8,6 +8,8 @@
             name="viewModel"
             type="com.example.exoplayersample.PlayerViewModel" />
 
+        <import type="com.example.exoplayersample.VideoQuality" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,27 +29,28 @@
             <!-- Bottom sheet contents. -->
             <RadioGroup
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:checkedButton="@={VideoQuality.qualityTypeToButtonId(viewModel.radioTypeVideoQuality)}">
 
                 <RadioButton
-                    android:id="@+id/rb720"
+                    android:id="@+id/rbAuto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="720p"
+                    android:text="自動 (推奨)"
                     android:textSize="32sp" />
 
                 <RadioButton
-                    android:id="@+id/rb360"
+                    android:id="@+id/rbHigh"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="360p"
+                    android:text="高画質 (1080p)"
                     android:textSize="32sp" />
 
                 <RadioButton
-                    android:id="@+id/rb240"
+                    android:id="@+id/rbLow"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="240p"
+                    android:text="低画質 (360p)"
                     android:textSize="32sp" />
 
             </RadioGroup>
