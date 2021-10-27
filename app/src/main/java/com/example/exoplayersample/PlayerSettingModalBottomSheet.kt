@@ -35,6 +35,9 @@ class PlayerSettingModalBottomSheet : BottomSheetDialogFragment() {
             }
             it.tvPlaybackSpeed.setOnClickListener {
                 Log.d(TAG, "tapped playback speed")
+                val bottomSheet = PlayerPlaybackSpeedModalBottomSheet()
+                bottomSheet.show(parentFragmentManager, "")
+                dismiss()
             }
         }
     }
