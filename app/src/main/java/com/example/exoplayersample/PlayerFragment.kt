@@ -32,6 +32,7 @@ class PlayerFragment : Fragment() {
     private val viewModel: PlayerViewModel by viewModels({ requireActivity() })
 
     private var player: SimpleExoPlayer? = null
+    private var trackSelector: DefaultTrackSelector? = null
     private var playWhenReady = true
     private var currentWindow = 0
     private var playbackPosition = 0L
@@ -52,7 +53,8 @@ class PlayerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         videoType = requireArguments().getString(ARGS_VIDEO_TYPE) ?: ""
-        setupPlaybackSpeedButton()
+        setupPlayerSettingButton()
+        setupVideoQualityChanging()
         setupPlaybackSpeedChanging()
     }
 
@@ -63,11 +65,11 @@ class PlayerFragment : Fragment() {
     }
 
     private fun initializePlayer() {
-        val trackSelector = DefaultTrackSelector(requireActivity()).apply {
+        trackSelector = DefaultTrackSelector(requireActivity()).apply {
             setParameters(buildUponParameters().setMaxVideoSizeSd())
         }
         player = SimpleExoPlayer.Builder(requireActivity())
-            .setTrackSelector(trackSelector)
+            .setTrackSelector(trackSelector!!)
             .build()
             .also { exoPlayer ->
                 binding.videoView.player = exoPlayer
@@ -108,6 +110,16 @@ class PlayerFragment : Fragment() {
         }
     }
 
+    private fun setupVideoQualityChanging() {
+        viewModel.radioTypeVideoQuality.observe(viewLifecycleOwner) {
+            Log.d(TAG, "selected quality: $it")
+            val newParameter = DefaultTrackSelector.ParametersBuilder(requireActivity())
+                .setMaxVideoBitrate(it.int)
+                .build()
+            (player?.trackSelector as DefaultTrackSelector).parameters = newParameter
+        }
+    }
+
     private fun setupPlaybackSpeedChanging() {
         viewModel.radioTypePlaybackSpeed.observe(viewLifecycleOwner) {
             Log.d(TAG, "selected speed: $it")
@@ -115,9 +127,9 @@ class PlayerFragment : Fragment() {
         }
     }
 
-    private fun setupPlaybackSpeedButton() {
-        val playbackSpeedBtn = binding.videoView.findViewById<ImageButton>(R.id.exo_playback_speed)
-        playbackSpeedBtn.setOnClickListener {
+    private fun setupPlayerSettingButton() {
+        val playerSettingBtn = binding.videoView.findViewById<ImageButton>(R.id.ibPlayerSetting)
+        playerSettingBtn.setOnClickListener {
             val bottomSheet = PlayerSettingModalBottomSheet()
             bottomSheet.show(childFragmentManager, "")
         }
@@ -226,6 +238,7 @@ class PlayerFragment : Fragment() {
             it.release()
         }
         player = null
+        trackSelector = null
     }
 
     companion object {

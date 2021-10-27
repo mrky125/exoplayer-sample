@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.exoplayersample.PlayerViewModel" />
+
+        <import type="com.example.exoplayersample.VideoQuality" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:id="@+id/standard_bottom_sheet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!-- Bottom sheet contents. -->
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checkedButton="@={VideoQuality.qualityTypeToButtonId(viewModel.radioTypeVideoQuality)}">
+
+                <RadioButton
+                    android:id="@+id/rbAuto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="自動 (推奨)"
+                    android:textSize="32sp" />
+
+                <RadioButton
+                    android:id="@+id/rbHigh"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="高画質 (1080p)"
+                    android:textSize="32sp" />
+
+                <RadioButton
+                    android:id="@+id/rbLow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="低画質 (360p)"
+                    android:textSize="32sp" />
+
+            </RadioGroup>
+
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
