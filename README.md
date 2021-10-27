@@ -28,5 +28,10 @@ Sample app like Youtube.
 - https://stackoverflow.com/questions/40284772/exoplayer-2-playlist-listener
 - https://qiita.com/niusounds/items/5252df4af9754388aa35
 
+### Bitrate changing
+- https://exoplayer.dev/track-selection.html
+- https://www.youtube.com/watch?v=r-HxwXbI-1g
+- https://blog.socialcast.jp/01/post-661/
+
 ### View, ...etc
 - https://stackoverflow.com/questions/40494623/android-imageview-169
