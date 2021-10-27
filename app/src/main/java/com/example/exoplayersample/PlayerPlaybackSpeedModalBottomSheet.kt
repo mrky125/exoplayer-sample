@@ -5,15 +5,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.exoplayersample.databinding.ModalBottomSheetPlayerSettingBinding
+import androidx.fragment.app.viewModels
+import com.example.exoplayersample.databinding.ModalBottomSheetPlayerPlaybackSpeedBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class PlayerSettingModalBottomSheet : BottomSheetDialogFragment() {
+class PlayerPlaybackSpeedModalBottomSheet : BottomSheetDialogFragment() {
 
     private val binding by lazy(LazyThreadSafetyMode.NONE) {
-        ModalBottomSheetPlayerSettingBinding.inflate(layoutInflater)
+        ModalBottomSheetPlayerPlaybackSpeedBinding.inflate(layoutInflater)
     }
+    private val viewModel: PlayerViewModel by viewModels({ requireActivity() })
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,18 +27,8 @@ class PlayerSettingModalBottomSheet : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupClickListener()
-    }
-
-    private fun setupClickListener() {
-        binding.also {
-            it.tvQualitySetting.setOnClickListener {
-                Log.d(TAG, "tapped quality setting")
-            }
-            it.tvPlaybackSpeed.setOnClickListener {
-                Log.d(TAG, "tapped playback speed")
-            }
-        }
+        Log.d(TAG, "viewModel: $viewModel")
+        binding.viewModel = viewModel
     }
 
     override fun onStart() {
@@ -46,6 +38,6 @@ class PlayerSettingModalBottomSheet : BottomSheetDialogFragment() {
     }
 
     companion object {
-        private const val TAG = "PlayerSettingModalBottomSheet"
+        private const val TAG = "PlayerPlaybackSpeedModalBottomSheet"
     }
 }
