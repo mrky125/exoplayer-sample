@@ -32,6 +32,9 @@ class PlayerSettingModalBottomSheet : BottomSheetDialogFragment() {
         binding.also {
             it.tvQualitySetting.setOnClickListener {
                 Log.d(TAG, "tapped quality setting")
+                val bottomSheet = PlayerQualityModalBottomSheet()
+                bottomSheet.show(parentFragmentManager, "")
+                dismiss()
             }
             it.tvPlaybackSpeed.setOnClickListener {
                 Log.d(TAG, "tapped playback speed")
