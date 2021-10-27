@@ -52,7 +52,7 @@ class PlayerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         videoType = requireArguments().getString(ARGS_VIDEO_TYPE) ?: ""
-        setupPlaybackSpeedButton()
+        setupPlayerSettingButton()
         setupVideoQualityChanging()
         setupPlaybackSpeedChanging()
     }
@@ -108,9 +108,9 @@ class PlayerFragment : Fragment() {
         }
     }
 
-    private fun setupPlaybackSpeedButton() {
-        val playbackSpeedBtn = binding.videoView.findViewById<ImageButton>(R.id.exo_playback_speed)
-        playbackSpeedBtn.setOnClickListener {
+    private fun setupPlayerSettingButton() {
+        val playerSettingBtn = binding.videoView.findViewById<ImageButton>(R.id.ibPlayerSetting)
+        playerSettingBtn.setOnClickListener {
             val bottomSheet = PlayerSettingModalBottomSheet()
             bottomSheet.show(childFragmentManager, "")
         }
