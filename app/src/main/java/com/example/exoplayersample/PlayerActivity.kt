@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.exoplayersample.databinding.ActivityPlayerBinding
 import android.content.pm.ActivityInfo
 import android.provider.Settings
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class PlayerActivity : AppCompatActivity() {
 
@@ -101,6 +102,7 @@ class PlayerActivity : AppCompatActivity() {
                 }
             }
         orientationEventListener.enable()
+        setupBottomSheet()
     }
 
     private fun setupFragment() {
@@ -108,6 +110,16 @@ class PlayerActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(binding.container.id, PlayerFragment.newInstance(strVideoType))
             .commit()
+    }
+
+    private fun setupBottomSheet() {
+        val behavior = BottomSheetBehavior.from(binding.bottomSheet)
+        Log.d(TAG, "behavior: ${behavior.state}")
+        binding.bottomSheet.setOnClickListener {
+            Log.d(TAG, "tapped, hideable: ${behavior.isHideable}, state: ${behavior.state}")
+            val bottomSheet = PlaylistModalBottomSheet()
+            bottomSheet.show(supportFragmentManager, "")
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.R)
