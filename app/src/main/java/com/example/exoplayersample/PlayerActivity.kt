@@ -117,7 +117,9 @@ class PlayerActivity : AppCompatActivity() {
         Log.d(TAG, "behavior: ${behavior.state}")
         binding.bottomSheet.setOnClickListener {
             Log.d(TAG, "tapped, hideable: ${behavior.isHideable}, state: ${behavior.state}")
-            val bottomSheet = PlaylistModalBottomSheet()
+            // 描画範囲のうちプレーヤーを除いた、つまりプレーヤー下部から画面末尾までの高さを取得し、モーダルボトムシートの高さに設定する
+            val modalBottomSheetPeekHeight = binding.coordinator.height
+            val bottomSheet = PlaylistModalBottomSheet.newInstance(modalBottomSheetPeekHeight)
             bottomSheet.show(supportFragmentManager, "")
         }
     }
