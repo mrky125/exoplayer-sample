@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.exoplayersample.databinding.ActivityPlayerBinding
 import android.content.pm.ActivityInfo
 import android.provider.Settings
+import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -117,13 +118,18 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        val data = listOf("A", "B", "C", "D", "E", "F", "G", "H", "I", "J")
-        val verticalListAdapter = VerticalListAdapter().also {
+        val verticalListAdapter1 = VerticalListAdapter().also {
+            val data = listOf("A", "B", "C", "D", "E", "F", "G", "H", "I", "J")
             it.submitList(data)
         }
+        val verticalListAdapter2 = VerticalListAdapter().also {
+            val data = listOf("K", "L", "M", "N", "O", "P", "Q", "R", "S", "T")
+            it.submitList(data)
+        }
+        val concatAdapter = ConcatAdapter(verticalListAdapter1, verticalListAdapter2)
         binding.recyclerView.also {
             it.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-            it.adapter = verticalListAdapter
+            it.adapter = concatAdapter
         }
     }
 
