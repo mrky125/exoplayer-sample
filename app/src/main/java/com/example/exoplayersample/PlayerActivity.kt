@@ -16,6 +16,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.exoplayersample.databinding.ActivityPlayerBinding
 import android.content.pm.ActivityInfo
 import android.provider.Settings
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.exoplayersample.epoxy.EpoxyController
+import com.example.exoplayersample.epoxy.EpoxyDataList
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class PlayerActivity : AppCompatActivity() {
@@ -34,7 +38,9 @@ class PlayerActivity : AppCompatActivity() {
             it.lifecycleOwner = this
         }
         setupFragment()
+        setupRecyclerView()
         Log.d(TAG, "viewModel: $viewModel")
+
         val orientationEventListener: OrientationEventListener =
             object : OrientationEventListener(this) {
                 private var lastOrientation: Int = 0
@@ -110,6 +116,16 @@ class PlayerActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(binding.container.id, PlayerFragment.newInstance(strVideoType))
             .commit()
+    }
+
+    private fun setupRecyclerView() {
+        val epoxyController = EpoxyController().also {
+            it.setData(EpoxyDataList())
+        }
+        binding.recyclerView.also {
+            it.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+            it.adapter = epoxyController.adapter
+        }
     }
 
     private fun setupBottomSheet() {
