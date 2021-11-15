@@ -20,6 +20,28 @@ class PlayerParentFragment : Fragment() {
         FragmentPlayerParentBinding.inflate(layoutInflater)
     }
 
+    private var bottomFragment: BottomFragment? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        childFragmentManager.also { fragmentManager ->
+            fragmentManager.setFragmentResultListener("showBottomSheet", this) { _, _ ->
+                // 描画範囲のうちプレーヤーを除いた、つまりプレーヤー下部から画面末尾までの高さを取得し、モーダルボトムシートの高さに設定する
+                val modalBottomSheetPeekHeight = binding.coordinator.height
+                val bottomSheet = PlaylistModalBottomSheet.newInstance(modalBottomSheetPeekHeight)
+                bottomSheet.show(fragmentManager, "")
+            }
+            fragmentManager.setFragmentResultListener("showAgainBottomFragment", this) { _, _ ->
+                // ボトムシートが閉じられたら、ボトムのFragmentを再表示する
+                bottomFragment?.let {
+                    fragmentManager.beginTransaction()
+                        .show(it)
+                        .commit()
+                }
+            }
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -47,20 +69,14 @@ class PlayerParentFragment : Fragment() {
             delay(2000)
             val slide = Slide().apply { slideEdge = Gravity.BOTTOM }
             val transitionSet = TransitionSet().apply { addTransition(slide) }
-            val bottomFragment = BottomFragment().apply { enterTransition = transitionSet }
+            bottomFragment = BottomFragment().apply {
+                enterTransition = transitionSet
+                exitTransition = transitionSet
+            }
             childFragmentManager.beginTransaction()
-                .replace(binding.containerBottom.id, bottomFragment)
+                .replace(binding.containerBottom.id, bottomFragment!!)
                 .commit()
         }
-//        val behavior = BottomSheetBehavior.from(binding.bottomSheet)
-//        Log.d(TAG, "behavior: ${behavior.state}")
-//        binding.bottomSheet.setOnClickListener {
-//            Log.d(TAG, "tapped, hideable: ${behavior.isHideable}, state: ${behavior.state}")
-//            // 描画範囲のうちプレーヤーを除いた、つまりプレーヤー下部から画面末尾までの高さを取得し、モーダルボトムシートの高さに設定する
-//            val modalBottomSheetPeekHeight = binding.coordinator.height
-//            val bottomSheet = PlaylistModalBottomSheet.newInstance(modalBottomSheetPeekHeight)
-//            bottomSheet.show(childFragmentManager, "")
-//        }
     }
 
     companion object {

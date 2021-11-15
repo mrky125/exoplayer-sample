@@ -1,12 +1,16 @@
 package com.example.exoplayersample.epoxy
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
+import androidx.lifecycle.lifecycleScope
 import com.example.exoplayersample.databinding.FragmentBottomBinding
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class BottomFragment : Fragment() {
 
@@ -24,12 +28,18 @@ class BottomFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupBottomSheet()
+        setupShowingBottomSheet()
     }
 
-    private fun setupBottomSheet() {
+    private fun setupShowingBottomSheet() {
         binding.root.setOnClickListener {
-            Log.d(TAG, "tapped bottom!")
+            parentFragmentManager.beginTransaction()
+                .hide(this)
+                .commit()
+            lifecycleScope.launch {
+                delay(500)
+                setFragmentResult("showBottomSheet", bundleOf())
+            }
         }
     }
 

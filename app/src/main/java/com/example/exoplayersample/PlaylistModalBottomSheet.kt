@@ -1,6 +1,7 @@
 package com.example.exoplayersample
 
 import android.annotation.SuppressLint
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,6 +9,8 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
 import com.example.exoplayersample.databinding.ModalBottomSheetPlaylistBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -57,6 +60,11 @@ class PlaylistModalBottomSheet : BottomSheetDialogFragment() {
             // タッチイベントを消化せず、上位クラスにてスクロールイベントを行う（こうしないとスクロールエリアがスクロールしない）
             false
         }
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        setFragmentResult("showAgainBottomFragment", bundleOf())
+        super.onDismiss(dialog)
     }
 
     companion object {
