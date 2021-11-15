@@ -16,11 +16,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.exoplayersample.databinding.ActivityPlayerBinding
 import android.content.pm.ActivityInfo
 import android.provider.Settings
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.exoplayersample.epoxy.EpoxyController
-import com.example.exoplayersample.epoxy.EpoxyDataList
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class PlayerActivity : AppCompatActivity() {
 
@@ -38,7 +33,6 @@ class PlayerActivity : AppCompatActivity() {
             it.lifecycleOwner = this
         }
         setupFragment()
-        setupRecyclerView()
         Log.d(TAG, "viewModel: $viewModel")
 
         val orientationEventListener: OrientationEventListener =
@@ -108,36 +102,13 @@ class PlayerActivity : AppCompatActivity() {
                 }
             }
         orientationEventListener.enable()
-        setupBottomSheet()
     }
 
     private fun setupFragment() {
         val strVideoType = intent.getStringExtra(EXTRA_VIDEO_TYPE) ?: ""
         supportFragmentManager.beginTransaction()
-            .replace(binding.container.id, PlayerFragment.newInstance(strVideoType))
+            .replace(binding.container.id, PlayerParentFragment.newInstance(strVideoType))
             .commit()
-    }
-
-    private fun setupRecyclerView() {
-        val epoxyController = EpoxyController().also {
-            it.setData(EpoxyDataList())
-        }
-        binding.recyclerView.also {
-            it.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-            it.adapter = epoxyController.adapter
-        }
-    }
-
-    private fun setupBottomSheet() {
-        val behavior = BottomSheetBehavior.from(binding.bottomSheet)
-        Log.d(TAG, "behavior: ${behavior.state}")
-        binding.bottomSheet.setOnClickListener {
-            Log.d(TAG, "tapped, hideable: ${behavior.isHideable}, state: ${behavior.state}")
-            // 描画範囲のうちプレーヤーを除いた、つまりプレーヤー下部から画面末尾までの高さを取得し、モーダルボトムシートの高さに設定する
-            val modalBottomSheetPeekHeight = binding.coordinator.height
-            val bottomSheet = PlaylistModalBottomSheet.newInstance(modalBottomSheetPeekHeight)
-            bottomSheet.show(supportFragmentManager, "")
-        }
     }
 
     @RequiresApi(Build.VERSION_CODES.R)
