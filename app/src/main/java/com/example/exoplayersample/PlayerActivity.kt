@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.exoplayersample.databinding.ActivityPlayerBinding
 import android.content.pm.ActivityInfo
 import android.provider.Settings
+import android.view.Window
 
 class PlayerActivity : AppCompatActivity() {
 
@@ -27,6 +28,8 @@ class PlayerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Necessary to use animation for fragment transition.
+        window.requestFeature(Window.FEATURE_CONTENT_TRANSITIONS)
         setContentView(binding.root)
         binding.also {
             it.viewModel = viewModel

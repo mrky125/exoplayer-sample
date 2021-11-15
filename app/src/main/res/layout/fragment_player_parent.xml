@@ -14,29 +14,18 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@id/coordinator"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/containerChild"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <LinearLayout
-            android:id="@+id/bottomSheet"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/containerBottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/purple_200"
-            android:orientation="vertical"
-            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="Show Playlists"
-                android:textSize="32sp" />
-
-        </LinearLayout>
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
