@@ -26,9 +26,12 @@ class PlayerParentFragment : Fragment() {
         super.onCreate(savedInstanceState)
         childFragmentManager.also { fragmentManager ->
             fragmentManager.setFragmentResultListener("showBottomSheet", this) { _, _ ->
-                // 描画範囲のうちプレーヤーを除いた、つまりプレーヤー下部から画面末尾までの高さを取得し、モーダルボトムシートの高さに設定する
-                val modalBottomSheetPeekHeight = binding.coordinator.height
-                val bottomSheet = PlaylistModalBottomSheet.newInstance(modalBottomSheetPeekHeight)
+                // 描画範囲のうちプレーヤーを除いた、つまりプレーヤー下部から画面末尾までの高さを、折り畳み時（デフォルト表示時）の高さに設定する
+                val peekHeight = binding.coordinator.height
+                // アクションバーから下をボトムシートの展開時（全表示）の高さに設定したいため、アクションバーの高さを渡す
+                // getActionBar では取得できず getSupportActionBar で取得する必要があるためキャストしている
+                val actionbarHeight = (requireActivity() as PlayerActivity).supportActionBar?.height ?: 0
+                val bottomSheet = PlaylistModalBottomSheet.newInstance(peekHeight, actionbarHeight)
                 bottomSheet.show(fragmentManager, "")
             }
             fragmentManager.setFragmentResultListener("showAgainBottomFragment", this) { _, _ ->

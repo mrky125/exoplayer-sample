@@ -36,10 +36,7 @@ class PlaylistModalBottomSheet : BottomSheetDialogFragment() {
 
         val behavior = BottomSheetBehavior.from(requireView().parent as View)
         setupCustomDragBehavior(behavior)
-        // 画面内表示のプレーヤーの下部にフィットするよう`peekHeight`を設定する
-        val peekHeight = requireArguments().getInt(ARGS_PEEK_HEIGHT)
-        Log.d(TAG, "height: $peekHeight")
-        behavior.peekHeight = peekHeight
+        customizeBottomSheetHeight(behavior)
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -62,6 +59,18 @@ class PlaylistModalBottomSheet : BottomSheetDialogFragment() {
         }
     }
 
+    private fun customizeBottomSheetHeight(behavior: BottomSheetBehavior<View>) {
+        // 画面内表示のプレーヤーの下部にフィットするよう`peekHeight`を設定する
+        val peekHeight = requireArguments().getInt(ARGS_PEEK_HEIGHT)
+        behavior.peekHeight = peekHeight
+
+        // アクションバーの高さをオフセットに設定し、アクションバー下部までを全展開時の高さとする
+        val actionbarHeight = requireArguments().getInt(ARGS_ACTIONBAR_HEIGHT)
+        behavior.expandedOffset = actionbarHeight
+        behavior.isFitToContents = false // 全展開時の高さを指定するには、このフラグをfalseにする必要あり
+        Log.d(TAG, "peekHeight: $peekHeight, actionbarHeight: $actionbarHeight")
+    }
+
     override fun onDismiss(dialog: DialogInterface) {
         setFragmentResult("showAgainBottomFragment", bundleOf())
         super.onDismiss(dialog)
@@ -70,11 +79,13 @@ class PlaylistModalBottomSheet : BottomSheetDialogFragment() {
     companion object {
         private const val TAG = "PlaylistModalBottomSheet"
         private const val ARGS_PEEK_HEIGHT = "args_peek_height"
+        private const val ARGS_ACTIONBAR_HEIGHT = "args_actionbar_height"
 
-        fun newInstance(peekHeight: Int): PlaylistModalBottomSheet {
+        fun newInstance(peekHeight: Int, actionbarHeight: Int): PlaylistModalBottomSheet {
             return PlaylistModalBottomSheet().apply {
                 arguments = Bundle().apply {
                     putInt(ARGS_PEEK_HEIGHT, peekHeight)
+                    putInt(ARGS_ACTIONBAR_HEIGHT, actionbarHeight)
                 }
             }
         }
