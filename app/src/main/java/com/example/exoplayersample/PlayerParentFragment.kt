@@ -70,7 +70,10 @@ class PlayerParentFragment : Fragment() {
     private fun setupBottomFragment() {
         lifecycleScope.launch {
             delay(2000)
-            val slide = Slide().apply { slideEdge = Gravity.BOTTOM }
+            val slide = Slide().apply {
+                slideEdge = Gravity.BOTTOM
+                duration = 100 // ms
+            }
             val transitionSet = TransitionSet().apply { addTransition(slide) }
             bottomFragment = BottomFragment().apply {
                 enterTransition = transitionSet
