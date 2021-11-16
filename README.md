@@ -1,15 +1,19 @@
 # exoplayer-sample
-Sample app like Youtube.
+Sample app like YouTube.
 
-| full | short |
-| ---- | ----- |
-| <image src="https://user-images.githubusercontent.com/69252773/138678463-0e7bc9e6-5bae-4e9e-9113-a3ed9a3f6e1b.jpg" width="240x" /> | <image src="https://user-images.githubusercontent.com/69252773/138679348-48360c0d-31ff-4445-b5f0-f17233d596ce.jpg" width="240x" /> |
+| full mode | bottom sheet appeared | short mode |
+| ---- | ------------ | ----- |
+| <image src="https://user-images.githubusercontent.com/69252773/141932917-d57e620c-eb76-4d8e-b5f0-84a7ff75df1a.jpg" width="240x" /> | <image src="https://user-images.githubusercontent.com/69252773/141933342-bddf4f33-e90d-486f-ad52-601d32d20ce1.jpg" width="240x" /> | <image src="https://user-images.githubusercontent.com/69252773/141933354-d7bcc684-c342-4af6-b054-ddcb9051993b.jpg" width="240x" /> |
 
 
 # Features
 - PlayerView is fixedly top of layout (not scroll)
 - ListView or RecycerView (something scroll items) is under the player
+  - It has horizontal scroll
 - Full screen mode, when button in the controller view is tapped or screen orientation changes
+- Bottom sheet behavior like YouTube Playlist
+  - Fotter fragment is fixedly bottom of layout, and has enter/exit transition animation
+  - Playlist modal bottom sheet like YouTube
 - Choose video type
   - Short (this supposes showing trial or billing user flow at the end of video) 
   - Full (Prevalent video features that have playlists like YouTube)
@@ -35,3 +39,6 @@ Sample app like Youtube.
 
 ### View, ...etc
 - https://stackoverflow.com/questions/40494623/android-imageview-169
+
+### Fragment enter/exit transition
+- https://qiita.com/verno3632/items/a97942a461204af4f421
