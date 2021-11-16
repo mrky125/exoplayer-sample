@@ -7,10 +7,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
-import androidx.lifecycle.lifecycleScope
 import com.example.exoplayersample.databinding.FragmentBottomBinding
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class BottomFragment : Fragment() {
 
@@ -36,10 +33,7 @@ class BottomFragment : Fragment() {
             parentFragmentManager.beginTransaction()
                 .hide(this)
                 .commit()
-            lifecycleScope.launch {
-                delay(500)
-                setFragmentResult("showBottomSheet", bundleOf())
-            }
+            setFragmentResult("showBottomSheet", bundleOf())
         }
     }
 
