@@ -11,6 +11,7 @@ class EpoxyController : TypedEpoxyController<EpoxyDataList>() {
             buildHorizontal1(it.horizontal1)
             buildVertical2(it.vertical2)
             buildHorizontal2(it.horizontal2)
+            buildBottomMargin()
         }
     }
 
@@ -61,6 +62,12 @@ class EpoxyController : TypedEpoxyController<EpoxyDataList>() {
             // itemSpacingDp: horizontal space in each item
             padding(Carousel.Padding.dp(60, 16, 60, 16, 40))
             models(this@EpoxyController.createItemHorizontals("horizontal2", list))
+        }
+    }
+
+    private fun buildBottomMargin() {
+        itemVertical {
+            id("bottomMargin")
         }
     }
 }
