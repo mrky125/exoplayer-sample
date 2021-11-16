@@ -2,6 +2,7 @@ package com.example.exoplayersample
 
 import android.annotation.SuppressLint
 import android.content.DialogInterface
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -69,6 +70,12 @@ class PlaylistModalBottomSheet : BottomSheetDialogFragment() {
         behavior.expandedOffset = actionbarHeight
         behavior.isFitToContents = false // 全展開時の高さを指定するには、このフラグをfalseにする必要あり
         Log.d(TAG, "peekHeight: $peekHeight, actionbarHeight: $actionbarHeight")
+    }
+
+    // 画面回転時は強制的に閉じる
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        dismiss()
     }
 
     override fun onDismiss(dialog: DialogInterface) {
