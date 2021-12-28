@@ -33,10 +33,24 @@
                 android:checkedButton="@={PlaybackSpeed.typeToButtonId(viewModel.radioTypePlaybackSpeed)}">
 
                 <RadioButton
-                    android:id="@+id/rbSpeed05"
+                    android:id="@+id/rbSpeed0_25"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="x0.25"
+                    android:textSize="32sp" />
+
+                <RadioButton
+                    android:id="@+id/rbSpeed0_50"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="x0.5"
+                    android:textSize="32sp" />
+
+                <RadioButton
+                    android:id="@+id/rbSpeed0_75"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="x0.75"
                     android:textSize="32sp" />
 
                 <RadioButton
@@ -47,10 +61,31 @@
                     android:textSize="32sp" />
 
                 <RadioButton
-                    android:id="@+id/rbSpeed15"
+                    android:id="@+id/rbSpeed1_25"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="x1.25"
+                    android:textSize="32sp" />
+
+                <RadioButton
+                    android:id="@+id/rbSpeed1_50"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="x1.5"
+                    android:textSize="32sp" />
+
+                <RadioButton
+                    android:id="@+id/rbSpeed1_75"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="x1.75"
+                    android:textSize="32sp" />
+
+                <RadioButton
+                    android:id="@+id/rbSpeed2_00"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="x2.0"
                     android:textSize="32sp" />
 
             </RadioGroup>
